@@ -131,6 +131,16 @@ main {
     overflow: hidden;
 }
 
+#editing>#copy-colour {
+    background: #111;
+    padding: 1rem;
+    border-radius: 1000px;
+    aspect-ratio: 1 / 1;
+    color: #fff;
+    z-index: 1;
+    cursor: pointer;
+}
+
 #editing-original {
     position: absolute;
     top: 0;
@@ -139,7 +149,8 @@ main {
     right: 50%;
 }
 
-#save {
+#save,
+#burn {
     background: #222;
     border: solid 1px transparent;
     border-radius: 1000px;
@@ -150,7 +161,8 @@ main {
     transition: all 0.2s ease-out;
 }
 
-#save:hover {
+#save:hover,
+#burn:hover {
     border-color: #555;
 }
 

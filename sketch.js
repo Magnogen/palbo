@@ -148,21 +148,30 @@
     };
 
     const editColour = (element) => {
+
+        editingColour.replaceChildren(originalColour);
+        editor.replaceChildren(editingColour);
         editor.style.pointerEvents = 'auto';
         editor.style.opacity = '1';
         originalColour.style.background = editingColour.style.background = element.style.background;
 
         const input = document.createElement('input');
         let original = input.value = element.textContent;
+        const copy = document.createElement('i');
+        copy.id = 'copy-colour'
+        copy.classList.add('fa', 'fa-copy');
         const save = document.createElement('div');
         save.id = 'save';
         save.innerHTML = 'save';
+        const burn = document.createElement('div');
+        burn.id = 'burn';
+        burn.innerHTML = 'burn it';
 
         input.style.fontWeight = '400';
 
         input.on('input', (event) => input.trigger('keydown', event));
         input.on('keydown', (event) => {
-            if (event.key == 'Enter') { input.blur(); save.click(); }
+            if (event.key == 'Enter') input.blur();
             input.value = input.value.toLowerCase().replaceAll(/[^0-9a-f]/g, '');
             input.style.width = getWidthOfInput(input) + "px";
             if (input.value.length != 6) return;
@@ -174,21 +183,43 @@
             if (input.value == '') input.value = original;
             if (input.value == original) return;
         });
+        copy.on('click', (event) => {
+            navigator.clipboard.writeText(original).then(
+                () => {
+                    copy.classList.remove('fa-copy');
+                    copy.classList.add('fa-check');
+                },
+                () => {
+                    /* clipboard write failed */
+                },
+            );
+        });
         save.on('click', (event) => {
-            element.style.background = originalColour.style.background = '#' + input.value;
-            element.textContent = input.value;
-
             const currentPalette = selectedPalette.firstChild.value;
             data.data[currentPalette][[].indexOf.call(element.parentNode.children, element)] = chroma(input.value);
             saveData(data);
 
+            element.style.background = originalColour.style.background = '#' + input.value;
+            element.textContent = input.value;
+
             editor.style.opacity = '0';
             editor.style.pointerEvents = 'none';
-            editor.replaceChildren(editingColour);
+        });
+        burn.on('click', (event) => {
+            const currentPalette = selectedPalette.firstChild.value;
+            data.data[currentPalette].splice([].indexOf.call(element.parentNode.children, element), 1);
+            saveData(data);
+
+            element.remove();
+
+            editor.style.opacity = '0';
+            editor.style.pointerEvents = 'none';
         });
 
+        editingColour.appendChild(copy);
         editor.appendChild(input);
         editor.appendChild(save);
+        editor.appendChild(burn);
     };
 
     addPaletteBtn.on('click', () => {
