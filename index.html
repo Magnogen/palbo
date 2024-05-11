@@ -10,6 +10,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.4.2/chroma.min.js"
     integrity="sha512-zInFF17qBFVvvvFpIfeBzo7Tj7+rQxLeTJDmbxjBz5/zIr89YVbTNelNhdTT+/DCrxoVzBeUPVFJsczKbB7sew=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" type="text/css" href="https://magnogen.net/style.css">
   <link rel="stylesheet" type="text/css" href="style.css">
   <script src="https://src.magnogen.net/dom.js"></script>
   <script src="https://src.magnogen.net/random.js"></script>
@@ -17,23 +18,23 @@
 </head>
 
 <body>
-  <div id="content">
-    <header>
-      <h1>palbo</h1>
-      <span>simple palette book</span>
-    </header>
+  <header>
+    <h1>palbo</h1>
+    <span>simple palette book</span>
+  </header>
+  <main>
     <nav id="palettes">
       <div class="palette" id="add-palette">+</div>
     </nav>
-    <main>
+    <div id="colours">
       <div class="colour" id="add-colour">+</div>
-    </main>
-  </div>
-  <div id="editor">
-    <div class="colour" id="editing">
-      <div id="editing-original"></div>
     </div>
-  </div>
+    <div id="editor">
+      <div class="colour" id="editing">
+        <div id="editing-original"></div>
+      </div>
+    </div>
+  </main>
 </body>
 
 </html>

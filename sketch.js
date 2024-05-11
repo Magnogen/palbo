@@ -33,7 +33,7 @@
 
     let addPaletteBtn = $('#add-palette');
     let addColourBtn = $('#add-colour');
-    let allColours = $('main');
+    let allColours = $('#colours');
     let editor = $('#editor');
     let editingColour = $('#editing');
     let originalColour = $('#editing-original');
@@ -71,9 +71,9 @@
         const tmp = document.createElement("span");
         tmp.className = "input-element tmp-element";
         tmp.innerHTML = input.value.replaceAll(/[^A-Za-z0-9_\-]/g, '_');
-        document.body.appendChild(tmp);
+        $('html').appendChild(tmp);
         const theWidth = tmp.getBoundingClientRect().width;
-        document.body.removeChild(tmp);
+        $('html').removeChild(tmp);
         return theWidth;
     }
 
